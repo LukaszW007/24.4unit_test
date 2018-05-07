@@ -26,32 +26,36 @@ const reg = /(\d*)\.(\d*)/;
     return toDisplay;
 }*/
 function hours(time) {
-    const splitToHourAndFraction = (time / 3600);
-    const timeDividedToHoursAndFraction = reg.exec(splitToHourAndFraction);
+    const timeDividedToHoursAndFraction = reg.exec(time / 3600);
     const hour = timeDividedToHoursAndFraction[1];
-    const minutesInSeconds = (timeDividedToHoursAndFraction[0] - hour ) * 60;
-    const timeDividedToMinutesAndFraction = reg.exec(minutesInSeconds);
+    const timeDividedToMinutesAndFraction = reg.exec((timeDividedToHoursAndFraction[0] - hour ) * 60);
     const minute = timeDividedToMinutesAndFraction[1];
     const secondAndFraction = reg.exec((timeDividedToMinutesAndFraction[0] - minute) * 60);
     const second = secondAndFraction[1];
-    console.log(hour, minute, second);
-    if (hour === 0) {
+    console.log(typeof hour);
+    if (hour == 0 && minute!=0 && second!=0) {
         return `${minute}m ${second}s`;
     }
-    if (minute === 0) {
+    if (hour != 0 && minute==0 && second!=0) {
         return `${hour}h ${second}s`;
     }
-    if (second === 0) {
+    if (hour != 0 && minute!=0 && second==0) {
         return `${hour}h ${minute}m `;
     }
-    if (second === 0 && minute===0) {
+    if (hour != 0 && minute==0 && second==0) {
         return `${hour}h `;
     }
-    if (second === 0 && hour===0) {
+    if (hour == 0 && minute!=0 && second==0) {
         return `${minute}m `;
     }
-    if (hour === 0 && minute===0) {
+    if (hour == 0 && minute==0 && second!=0) {
         return `${second}s `;
+    }
+    if (hour == 0 && minute==0 && second==0) {
+        return `didn't start yet`;
+    }
+    if (hour != 0 && minute!=0 && second!=0) {
+      return `${hour}h ${minute}m ${second}s`;
     }
 }
 
