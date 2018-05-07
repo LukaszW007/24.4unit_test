@@ -31,8 +31,9 @@ function hours(time) {
     const timeDividedToMinutesAndFraction = reg.exec((timeDividedToHoursAndFraction[0] - hour ) * 60);
     const minute = timeDividedToMinutesAndFraction[1];
     const secondAndFraction = reg.exec((timeDividedToMinutesAndFraction[0] - minute) * 60);
-    const second = secondAndFraction[1];
-    console.log(typeof hour);
+    // console.log(secondAndFraction[1]);
+    const second = Math.round(secondAndFraction[1]);
+    // console.log(typeof hour);
     if (hour == 0 && minute!=0 && second!=0) {
         return `${minute}m ${second}s`;
     }
@@ -52,7 +53,7 @@ function hours(time) {
         return `${second}s `;
     }
     if (hour == 0 && minute==0 && second==0) {
-        return `didn't start yet`;
+        return `0s`;
     }
     if (hour != 0 && minute!=0 && second!=0) {
       return `${hour}h ${minute}m ${second}s`;
@@ -60,7 +61,7 @@ function hours(time) {
 }
 
 const formatDate = (timeInSeconds) => {
-    console.log('w sekundach: ' + timeInSeconds);
+    // console.log('w sekundach: ' + timeInSeconds);
     return hours(timeInSeconds);
 
 };
